@@ -24,6 +24,10 @@ public class Queue<T>
 		vertices.add(vertex);
 	}
 	
+	/**
+	 * The dequeue operation keeps track of unused space and shifts the elements left if unused space is available.
+	 * @return An Optional of {@link Vertex}.
+	 */
 	public Optional<Vertex<T>> dequeue()
 	{
 		return Optional.ofNullable(vertices.remove(0));
