@@ -8,11 +8,13 @@ public class Vertex<T>
    private List<Vertex<T>> adjacencyList;
    private VertexStatus vertexStatus;
    private Vertex<T> parent;
+   private int distance;
    
    public Vertex()
    {
 	  //Initialize every vertex as not visited during creation.
 	  vertexStatus=VertexStatus.NOT_VISITED;
+	  distance = Integer.MAX_VALUE;
    }
    
    // TODO: Explore if there is a better way to set these.
@@ -44,5 +46,13 @@ public class Vertex<T>
 	public void setParent(Vertex<T> parent) 
 	{
 		this.parent = parent;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 }

@@ -23,6 +23,7 @@ public class BreadthFirstSearch<T>
 	 */
 	public void search(Vertex<T> source,Collection<Vertex<T>> vertices)
 	{
+		source.setDistance(0);
 		addNeighborsToQueue(source);
 		source.setVertexStatus(VertexStatus.VISITED);
 		
@@ -43,6 +44,7 @@ public class BreadthFirstSearch<T>
 			if(adjacentVertex.getVertexStatus()==VertexStatus.NOT_VISITED)
 			{
 			   adjacentVertex.setParent(currentVertex);
+			   adjacentVertex.setDistance(currentVertex.getDistance()+1);
 			   neighbors.enqueue(adjacentVertex);
 			}
 		}
