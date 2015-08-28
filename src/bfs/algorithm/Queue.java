@@ -13,9 +13,9 @@ import java.util.Optional;
  */
 public class Queue<T>
 {
-	private List<Vertex<T>> vertices=Collections.emptyList();
+	private List<Vertex> vertices=Collections.emptyList();
 	
-	public void enqueue(Vertex<T> vertex)
+	public void enqueue(Vertex vertex)
 	{
 		if(vertices.isEmpty())
 		{
@@ -28,7 +28,7 @@ public class Queue<T>
 	 * The dequeue operation keeps track of unused space and shifts the elements left if unused space is available.
 	 * @return An Optional of {@link Vertex}.
 	 */
-	public Optional<Vertex<T>> dequeue()
+	public Optional<Vertex> dequeue()
 	{
 		return Optional.ofNullable(vertices.remove(0));
 	}

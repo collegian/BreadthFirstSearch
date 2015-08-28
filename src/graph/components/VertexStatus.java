@@ -12,6 +12,11 @@ public enum VertexStatus
    VISITED,
    
    /**
+    * Implies that the current vertex has been explored but it's neighbors haven't been visited.
+    */
+   EXPLORED,
+   
+   /**
     * Implies that all the neighbors of the current vertex have not been visited.
     */
    NOT_VISITED;

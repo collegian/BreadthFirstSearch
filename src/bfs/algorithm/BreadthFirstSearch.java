@@ -21,40 +21,45 @@ public class BreadthFirstSearch<T>
 	 * @param source The source vertex from where the BFS proceeds.
 	 * @param vertices The Collection of vertices forming the graph.
 	 */
-	public void search(Vertex<T> source,Collection<Vertex<T>> vertices)
+	public void search(Vertex source,Collection<Vertex> vertices)
 	{
 		source.setDistance(0);
+		neighbors = new Queue<>();
 		addNeighborsToQueue(source);
 		source.setVertexStatus(VertexStatus.VISITED);
 		
-		Optional<Vertex<T>> currentVertexOptional = neighbors.dequeue();
-		if(currentVertexOptional.isPresent())
+		while(!neighbors.isQueueEmpty())
 		{
-			Vertex<T> currentVertex= currentVertexOptional.get();
-			currentVertex.setVertexStatus(VertexStatus.VISITED);
-			addNeighborsToQueue(currentVertex);
+			Optional<Vertex> currentVertexOptional = neighbors.dequeue();
+			if(currentVertexOptional.isPresent())
+			{
+				Vertex currentVertex= currentVertexOptional.get();
+				currentVertex.setVertexStatus(VertexStatus.VISITED);
+				addNeighborsToQueue(currentVertex);
+			}
 		}
 	}
 	
-	private void addNeighborsToQueue(Vertex<T> currentVertex)
+	private void addNeighborsToQueue(Vertex currentVertex)
 	{
-		List<Vertex<T>> adjacentVertices = currentVertex.getAdjacencyList();
-		for(Vertex<T> adjacentVertex:adjacentVertices)
+		List<Vertex> adjacentVertices = currentVertex.getAdjacencyList();
+		for(Vertex adjacentVertex:adjacentVertices)
 		{
 			if(adjacentVertex.getVertexStatus()==VertexStatus.NOT_VISITED)
 			{
 			   adjacentVertex.setParent(currentVertex);
 			   adjacentVertex.setDistance(currentVertex.getDistance()+1);
+			   adjacentVertex.setVertexStatus(VertexStatus.EXPLORED);
 			   neighbors.enqueue(adjacentVertex);
 			}
 		}
 	}
 	
-	public void printPath(Vertex<T> source, Vertex<T> destination)
+	public void printPath(Vertex source, Vertex destination)
 	{
 		if(source==destination)
 		{
-			System.out.println(source);
+			System.out.println(source.getCharRep());
 		}
 		else if(!destination.getParent().isPresent())
 		{
@@ -63,7 +68,7 @@ public class BreadthFirstSearch<T>
 		else 
 	    {
 			printPath(source,destination.getParent().get());
-		    System.out.println(destination);
+		    System.out.println(destination.getCharRep() + " Distance=" + destination.getDistance());
 		 }
 	}
 }

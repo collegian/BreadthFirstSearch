@@ -3,27 +3,29 @@ package graph.components;
 import java.util.List;
 import java.util.Optional;
 
-public class Vertex<T>
+public class Vertex
 {
-   private List<Vertex<T>> adjacencyList;
+   private List<Vertex> adjacencyList;
    private VertexStatus vertexStatus;
-   private Vertex<T> parent;
+   private Vertex parent;
    private int distance;
+   private char charRep;
    
-   public Vertex()
+   public Vertex(char charRep)
    {
 	  //Initialize every vertex as not visited during creation.
 	  vertexStatus=VertexStatus.NOT_VISITED;
 	  distance = Integer.MAX_VALUE;
+	  this.charRep=charRep;
    }
    
    // TODO: Explore if there is a better way to set these.
-   public void setAdjacencyList(List<Vertex<T>> adjacencyList)
+   public void setAdjacencyList(List<Vertex> adjacencyList)
    {
 	   this.adjacencyList = adjacencyList;
    }
    
-   public List<Vertex<T>> getAdjacencyList()
+   public List<Vertex> getAdjacencyList()
    {
      return adjacencyList;	   
    }
@@ -38,12 +40,12 @@ public class Vertex<T>
 	  this.vertexStatus = vertexStatus;
     }
 
-	public Optional<Vertex<T>> getParent() 
+	public Optional<Vertex> getParent() 
 	{
 		return Optional.ofNullable(parent);
 	}
 
-	public void setParent(Vertex<T> parent) 
+	public void setParent(Vertex parent) 
 	{
 		this.parent = parent;
 	}
@@ -54,5 +56,10 @@ public class Vertex<T>
 
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+
+	public char getCharRep() 
+	{
+		return charRep;
 	}
 }
